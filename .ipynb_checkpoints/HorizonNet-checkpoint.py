@@ -4,6 +4,13 @@ import os
 
 from urllib.request import urlretrieve
 
+get_ipython().system('git clone https://github.com/sunset1995/HorizonNet.git')
+
+
+#%%
+get_ipython().system('pip install torchfile')
+
+
 #%%
 os.chdir('HorizonNet')
 os.listdir()

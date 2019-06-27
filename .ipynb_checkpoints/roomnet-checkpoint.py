@@ -10,8 +10,8 @@ Original file is located at
 import os
 import urllib
 
-import sys
-sys.path.append('/home/roomnet/roomnet')
+os.chdir('roomnet/roomnet')
+print os.getcwd()
 
 import tensorflow as tf
 import numpy as np
@@ -26,6 +26,9 @@ import argparse
 #from get_res import get_im
 
 ADE20k_url = 'https://groups.csail.mit.edu/vision/datasets/ADE20K/ADE20K_2016_07_26.zip'
+!wget https://groups.csail.mit.edu/vision/datasets/ADE20K/ADE20K_2016_07_26.zip
+
+!unzip ADE20K_2016_07_26.zip
 
 val_datadir = 'ADE20K_2016_07_26/images' #location of ADE20k
 
@@ -52,13 +55,13 @@ if 1:
       net=RcnnNet()
     net.build_model()
   start_step=net.restore_model(sess, model_dir)
-  #print 'restored'
+  print 'restored'
   fout=open(os.path.join(outdir, 'acc.txt'), 'w')
   start_time=time.time()
   fetchworker=BatchFetcher(val_datadir,False, False)
   fetchworker.start()
   total_step=fetchworker.get_max_step()
-  print('total steps', total_step)
+  print 'total steps', total_step
   for i in range(total_step):
     im_in,lay_gt, label_gt,names=fetchworker.fetch()
     net.set_feed(im_in, lay_gt, label_gt,i)
