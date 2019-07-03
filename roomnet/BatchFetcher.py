@@ -7,7 +7,7 @@ import os
 import time
 import socket
 import threading
-import Queue
+import queue as Queue
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import scipy.io
 import helper
@@ -58,7 +58,7 @@ class BatchFetcher(threading.Thread):
         names.append(name)
         names.append(name+'2')
     names=sorted(names)
-    print 'total train  number', len(names)
+    print('total train number: {}'.format(len(names)))
     names=np.random.permutation(names)
     return names
   def get_val_names(self):
@@ -68,7 +68,7 @@ class BatchFetcher(threading.Thread):
       name=item[0][0]
       names.append(name)
     names=sorted(names)
-    print 'val number', len(names)
+    print('val number: {}'.format(len(names)))
 #    names=np.random.permutation(names)
     return names
   def get_max_step(self):
@@ -104,7 +104,7 @@ class BatchFetcher(threading.Thread):
       self.shutdown()
     while self.epoch<max_epoch+1 and not self.stopped:
       self.queue.put(self.work())
-      print 'push'
+      print('push')
       self.cur+=self.batch_size
 
   def fetch(self):
@@ -122,6 +122,6 @@ if __name__=='__main__':
 #  time.sleep(10)
   for i in range(5):
     a,b,c,d=fetchworker.fetch()
-    print a.shape, b.shape, c,d
+    print([a.shape, b.shape, c, d])
   fetchworker.shutdown()
 

@@ -133,7 +133,7 @@ class RoomnetVanilla(object):
   def save_model(self, sess, folder, it):
     self.saver.save(sess, os.path.join(folder, "model"+str(it)), global_step=it)
   def restore_model(self, sess, folder):
-    print 'restore all variables', folder
+    print('restore all variables %s' % folder)
     return load_snapshot(self.saver, sess, folder)
   def print_loss_acc(self, sess):
     output=sess.run([self.loss,self.class_loss, self.lay_loss], feed_dict=self.feed_dict)
