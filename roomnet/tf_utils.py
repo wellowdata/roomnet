@@ -155,7 +155,7 @@ def dropout(inputs,is_training,scope,keep_prob=0.5,noise_shape=None):
 
 def load_snapshot(saver, session, path):
   if not os.path.exists(path):
-    print '%s not exist' % path
+    print('%s not exist' % path)
     return 0
   assert os.path.exists(path), ('%s not exist' % path)
   ckpt = tf.train.get_checkpoint_state(path)
@@ -168,7 +168,7 @@ def load_snapshot(saver, session, path):
     print("done.")
     return num_iter
   else:
-    print '%s not exist' % path
+    print('%s not exist' % path)
     return 0
 
   
