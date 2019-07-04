@@ -1,6 +1,6 @@
 # Mark Wells
 
-Trying to replication Roomnet for use in my CSML Masters thesis.
+Trying to replicate Roomnet for use in my CSML Masters thesis.
 
 Original README below:
 
