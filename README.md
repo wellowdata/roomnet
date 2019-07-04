@@ -1,3 +1,9 @@
+# Mark Wells
+
+Trying to replication Roomnet for use in my CSML Masters thesis.
+
+Original README below:
+
 # roomnet
 This is a tensorflow implementation of room layout paper: [RoomNet: End-to-End Room Layout Estimation](https://arxiv.org/pdf/1703.06241.pdf).
 
