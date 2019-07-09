@@ -10,8 +10,8 @@ Original file is located at
 import os
 import urllib
 
-os.chdir('roomnet/roomnet')
-print os.getcwd()
+import sys
+sys.path.append('/home/roomnet/roomnet')
 
 import tensorflow as tf
 import numpy as np
@@ -26,15 +26,12 @@ import argparse
 #from get_res import get_im
 
 ADE20k_url = 'https://groups.csail.mit.edu/vision/datasets/ADE20K/ADE20K_2016_07_26.zip'
-!wget https://groups.csail.mit.edu/vision/datasets/ADE20K/ADE20K_2016_07_26.zip
-
-!unzip ADE20K_2016_07_26.zip
 
 val_datadir = 'ADE20K_2016_07_26/images' #location of ADE20k
 
 pretrained_model_url = r'https://drive.google.com/file/d/1tyw1fmSfd8LvItCOJrOWMMo7Kpjb7l4S/view'
 urllib.urlretrieve(pretrained_model_url, os.getcwd()+ r'\model')
-
+"""
 #def test(args):
 if 1:
   outdir=os.path.join(os.getcwd(), 'test')
@@ -52,16 +49,19 @@ if 1:
     if 0: #args.net=='vanilla':
       net=RoomnetVanilla()
     if 1: #args.net=='rcnn':
-      net=RcnnNet()
-    net.build_model()
-  start_step=net.restore_model(sess, model_dir)
-  print 'restored'
-  fout=open(os.path.join(outdir, 'acc.txt'), 'w')
-  start_time=time.time()
-  fetchworker=BatchFetcher(val_datadir,False, False)
-  fetchworker.start()
-  total_step=fetchworker.get_max_step()
-  print 'total steps', total_step
+"""
+net=RcnnNet()
+net.build_model()
+start_step=net.restore_model(sess, model_dir)
+  
+    
+#fout=open(os.path.join(outdir, 'acc.txt'), 'w')
+start_time=time.time()
+fetchworker=BatchFetcher(val_datadir,False, False)
+fetchworker.start()
+"""
+total_step=fetchworker.get_max_step()
+  print('total steps', total_step)
   for i in range(total_step):
     im_in,lay_gt, label_gt,names=fetchworker.fetch()
     net.set_feed(im_in, lay_gt, label_gt,i)
@@ -84,4 +84,4 @@ if 1:
     print('[step: %d] [time: %s] [acc: %s]'%(i, time.time()-start_time, acc))
     net.print_loss_acc(sess)
   fetchworker.shutdown()
-
+"""
